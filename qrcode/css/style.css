@@ -79,7 +79,8 @@ textarea{
 	color: #000;
 }
 footer{
-	margin-top: 70px;
+	/*margin-top: 70px;*/
+	bottom: 0 !important;
 	background: #292622;
 	color: #fff;
 }
