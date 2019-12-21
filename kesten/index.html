@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Twitter Card-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="twitter:title" content="kesten Chat Bot 🎏">
+    <meta name="twitter:site" content="@asaolu_elijah" />
+    <meta name="twitter:creator" content="@asaolu_elijah" />
+    <meta name="twitter:description" content="A web based virtual assistant aimed at solving depression problem by keeping users engaged while having fun along the way. This chatbot also serve as a virtual assistant as it can perform tasks like playing music, keeping reminder, navigating location e.t.c">
+    <meta name="description" content="A web based virtual assistant aimed at solving depression problem by keeping users engaged while having fun along the way. This chatbot also serve as a virtual assistant as it can perform tasks like playing music, keeping reminder, navigating location e.t.c">
+    <meta name="keywords" content="Asaolu Elijah, Asaolu, web bot, kesten,kesten bot, virtual assistant, Web bot, bot by asaolu elijah,crazy chat bot,made in nigeria, virtual bot, smart bot, OpenSource, Chat Bot" />
+    <!--Open Graph-->
+    <meta property="og:title" content="KESTEN Chat Bot 🎏" />
+    <meta property="og:description" content="A web based virtual assistant aimed at solving depression problem by keeping users engaged while having fun along the way. This chatbot also serve as a virtual assistant as it can perform tasks like playing music, keeping reminder, navigating location e.t.c"
+    />
+    <meta name="author" content="kesten Chat Bot - Asaolu Elijah">
+    <meta property="og:url" content="https://asaoluelijah.github.io/" />
+    <meta property="og:site_name" content="kesten Chat Bot" />
+    <meta property="og:type" content="website" />
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="kesten Chat Bot" />
+    <link rel="apple-touch-icon" href="img/kes.png" />
+    <!-- Windows -->
+    <meta name="msapplication-TileImage" content="img/kes.png" />
+    <meta name="msapplication-TileColor" content="#1c234d" />
+
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#1c234d" />
+
+    <!-- Google Knowledge Graph card -->
+    <script type='application/ld+json'>
+        {
+            "@context": "https://www.schema.org",
+            "@type": "Chat Bot",
+            "name": "kesten Chat Bot",
+            "url": "https://asaoluelijah.github.io/kesten",
+            "description": "A web based virtual assistant aimed at solving depression problem by keeping users engaged while having fun along the way. This chatbot also serve as a virtual assistant as it can perform tasks like playing music, keeping reminder, navigating location e.t.c"
+        }
+    </script>
+    <!-- Framework7 CSS-->
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <!-- Icons CSS-->
+    <link rel="stylesheet" href="css/ionicons.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <!-- Style CSS-->
+    <link rel="stylesheet" href="css/kesten.css">
+
+</head>
+
+<body>
+    <center>
+        <br><br>
+        <h1 style="color: #fff;">KESTEN</h1>
+        <div class="avatar">
+            <img src="img/kes.png" id="avatar" onclick="speak()">
+        </div>
+        <div class="answer" id="ans">
+            Hello there, I am kesten, your web virtual assistant 😇, feel free to ask me anything, I will try my best to answer your questions✌.
+        </div>
+        <br><br>
+        <form action="" id="form">
+            <input type="hidden" name="" id="remind" value="">
+            <input class="control" autocomplete="false" placeholder="Ask me anything!" id="text">
+            <button type="submit" id="clickBtn" class="btn" onclick="fun()">🚀</button>
+        </form>
+        <br>
+        <div class="fotter" style="color: #fff;margin-top: 60px;">
+            <i class="icon ion-code" style="margin-bottom: 10px;font-size: 17px;"></i> with <i class="icon ion-heart" style="margin-bottom: 10px;font-size: 17px;color: rgb(221, 28, 28);"></i> by Asaolu Elijah
+        </div>
+        <!-- <a><i class="icon ion-social-facebook"></i></a>
+        <a><i class="icon ion-social-instagram"></i></a>
+        <a><i class="icon ion-social-twitter"></i></a>
+        <a><i class="icon ion-social-reddit"></i></a>
+        <a><i class="icon ion-social-github"></i></a> -->
+    </center>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(reg => {
+                        console.log('Service worker registered! 😎', reg);
+                    })
+                    .catch(err => {
+                        console.log('😥 Service worker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+    <script src="js/kesten.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+        var url = `https://official-joke-api.appspot.com/jokes/random`;
+        var settings = {
+            "url": url,
+            "method": "GET",
+            "timeout": 0,
+        };
+
+        $.ajax(settings).done(function(response) {
+            // console.log(response)
+            localStorage.q = response.setup || "What do we call a baby lizard";
+            localStorage.a = response.punchline || "Lizzy baby";
+        });
+        // form.preventDefault();
+        $("#form").submit(function(e) {
+            e.preventDefault();
+            document.querySelector('.control').value = ""
+        });
+    </script>
+</body>
+
+</html>
