@@ -62,9 +62,9 @@
 
         <header id="header" class="transparent-header no-sticky">
             <div id="header-wrap">
-                <div class="container">
-                    <a href="#"><img src="demos/photography/images/logo%402x.png" alt="My Logo" height="100"></a>
-                </div>
+                <!-- <div class="container">
+                    <a href="#"><img src="icons/asaolu_logo.png" alt="My Logo" height="238" width="200"></a>
+                </div> -->
                 <div>
                     <div class="primary-menu-trigger hamburger">
                         <i class="icon-line-menu"></i>
@@ -88,7 +88,7 @@
             </div>
         </header>
         <section id="slider home" class="slider-element full-screen clearfix" style="background: url('demos/photographer/images/dots-1.png') 100% 0 no-repeat; background-size: 60% auto">
-            <div class="container parallax clearfix" data-0="opacity: 1; overflow: visible; margin-top:0px" data-top-bottom="opacity: 0; overflow: visible; margin-top:100px">
+            <div class="container parallax clearfix" data-0="opacity: 1; overflow: visible; margin-top:0px" data-top-bottom="opacity: 0.9; overflow: visible; margin-top:100px">
                 <div class="vertical-middle ignore-header">
                     <div class="row align-items-center">
                         <div class="col-md-6">
@@ -133,9 +133,9 @@
                                         </div>
                                         <div class="d-block" style="margin: 90px auto"></div>
                                         <small>Latest Project</small>
-                                        <p class="mb-0 t400">Kesten - A web based virtual assistant with crazy features.
+                                        <p class="mb-0 t400">SayIt - Convert spoken words to text and easily share on social media.
                                         </p>
-                                        <h3 class="t500 mt-1 mb-0 capitalize d-flex align-self-end"><a href="kesten/index.html" target="_blank" class="text-dark">Visit <i
+                                        <h3 class="t500 mt-1 mb-0 capitalize d-flex align-self-end"><a href="sayit/index.html" target="_blank" class="text-dark">Visit <i
                                                     class="icon-line-arrow-right t600 position-relative"
                                                     style="top: 2px"></i></a></h3>
                                     </div>
@@ -407,18 +407,18 @@
                             </div>
 
                             <div class="col-md-5 mt-5 mt-md-0">
-                                <form style="max-width: 25rem;">
+                                <form style="max-width: 25rem;" action="https://formspree.io/mbjdvzer" method="POST">
                                     <div class="form-group">
                                         <label for="f-name">Full Name</label>
-                                        <input type="text" class="form-control" id="f-name" aria-describedby="emailHelp" placeholder="Enter Your Name">
+                                        <input name="name" type="text" class="form-control" id="f-name" aria-describedby="emailHelp" placeholder="Enter Your Name">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter Email">
+                                        <input name="_replyto" type="email" class="form-control" id="email" placeholder="Enter Email">
                                     </div>
                                     <div class="form-group">
                                         <label for="message">Message</label>
-                                        <textarea style="resize: none;" rows="5" class="form-control" id="message" placeholder="Hi Elijah, i have a project i'll like you to work on..."></textarea>
+                                        <textarea name="message" style="resize: none;" rows="5" class="form-control" id="message" placeholder="Hi Elijah, i have a project i'll like you to work on..."></textarea>
                                     </div>
                                     <button type="submit" class="button">Submit</button>
                                 </form>

@@ -1,11 +1,9 @@
 const cacheName = 'cache-v1';
 const precacheResources = [
-    '/',
     'index.html',
     'css/kesten.css',
     'css/style.css',
     'js/jquery-3.4.1.min.js',
-    'js/kesten.js',
     'fonts/Helvetica-Regular.otf',
     'fonts/Montserrat-Light.otf',
     'fonts/Montserrat-Regular.ttf',

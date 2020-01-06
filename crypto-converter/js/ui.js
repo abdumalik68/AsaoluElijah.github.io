@@ -67,7 +67,7 @@ class UI {
                <div class="card cyan darken-3">
                     <div class="card-content white-text">
                          <span class="card-title">Result</span>
-                         <p>The Price of ${result.name} from ${currency} is $ ${value}</p>
+                         <p>The Price of ${result.name} from ${currency} is N ${value}</p>
                          <hr>
                          <p>Last Hour: ${result.percent_change_1h} %</p>
                          <p>Last Day: ${result.percent_change_24h} %</p>

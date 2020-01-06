@@ -383,7 +383,7 @@ var SEMICOLON = SEMICOLON || {};
                 loading: !0,
                 loadingParentElement: "body",
                 loadingClass: "page-transition-wrap",
-                loadingInner: l + '<a href="?transition=disable" class="button button-small button-rounded disable-pagetransition">Disable Transition</a>',
+                loadingInner: l + '',
                 timeout: s,
                 timeoutCountdown: o,
                 onLoadEvent: !0,
@@ -2087,23 +2087,6 @@ var SEMICOLON = SEMICOLON || {};
         $cookieNotification = $("#cookie-notification");
     $(document).ready(SEMICOLON.documentOnReady.init), $window.on("load", SEMICOLON.documentOnLoad.init), $window.on("resize", SEMICOLON.documentOnResize.init)
 }(jQuery),
-function(e, t, a, i, s, n, o) {
-    e.GoogleAnalyticsObject = s, e.ga = e.ga || function() {
-        (e.ga.q = e.ga.q || []).push(arguments)
-    }, e.ga.l = 1 * new Date, n = t.createElement("script"), o = t.getElementsByTagName("script")[0], n.async = 1, n.src = "//www.google-analytics.com/analytics.js", o.parentNode.insertBefore(n, o)
-}(window, document, 0, 0, "ga"), ga("create", "UA-23255544-12", "auto"), ga("send", "pageview"), jQuery(document).ready(function() {
-    jQuery(".disable-pagetransition").on("click", function() {
-        return jQuery("body").addClass("no-transition"), jQuery(".page-transition-wrap").fadeOut(400, function() {
-            jQuery(this).remove()
-        }), !1
-    })
-}), jQuery.get("http://themes.semicolonweb.com/html/canvas/switcher-html.html", function(e) {
-    jQuery("#gotoTop").after(e), jQuery(".scw-trigger").on("click", function() {
-        jQuery(".scw-switcher-wrap").toggleClass("scw-switcher-open")
-    }), jQuery(document).on("click", function(e) {
-        jQuery(e.target).closest(".scw-switcher-wrap").length || jQuery(".scw-switcher-wrap").toggleClass("scw-switcher-open", !1)
-    })
-});
 jQuery(document).one("ajaxComplete", function() {
     jQuery(".preloader-demo").on("click", function(s) {
         var i = jQuery(this),

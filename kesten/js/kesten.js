@@ -319,21 +319,21 @@ function fun() {
         reaction = "cool";
     } else {
         answer = fetchResults(text);
-        var newAns = answer;
-        if (typeof newAns == "undefined") {
-            var ansArray = [
-                "I'm kinda confused right now.",
-                "Its so disappointing that am not prepared to answer this.",
-                "Looks like i dont have the answer to that.",
-                "I dont know how to answer that",
-                "If you are connected to the internet, i might have answered that"
-            ];
-            var rand = Math.floor(Math.random() * ansArray.length);
-            answer = ansArray[rand];
-            // return answer;
-            reaction = "angry";
+        // var newAns = answer;
+        // if (newAns == undefined) {
+        //     var ansArray = [
+        //         "I'm kinda confused right now.",
+        //         "Its so disappointing that am not prepared to answer this.",
+        //         "Looks like i dont have the answer to that.",
+        //         "I dont know how to answer that",
+        //         "If you are connected to the internet, i might have answered that"
+        //     ];
+        //     var rand = Math.floor(Math.random() * ansArray.length);
+        //     answer = ansArray[rand];
+        //     // return answer;
+        //     reaction = "angry";
 
-        }
+        // }
     }
     switch (reaction) {
         case 'angry':
@@ -357,26 +357,29 @@ function fun() {
 }
 
 function fetchResults(searchQuery) {
-    const endpoint = `https://simple.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=1&srsearch=${searchQuery}`;
-    fetch(endpoint)
-        .then(response => response.json())
-        .then(data => {
-            const results = data.query.search;
-            displayResults(results);
-        })
-        .catch(() => console.log('An error occurred'));
+    var url = `http://api.wolframalpha.com/v1/spoken?appid=9RWVPT-9QYGE4RP9Q&i=${searchQuery}`;
+    var settings = {
+        "url": url,
+        "method": "GET",
+        "timeout": 0,
+    };
+
+    $.ajax(settings).done(function(response) {
+        // console.log(response)
+        setTimeout(() => {
+            document.getElementById('ans').innerHTML = data;
+        }, 2000);
+    });
+    // const url = `http://api.wolframalpha.com/v1/spoken?appid=9RWVPT-9QYGE4RP9Q&i=${searchQuery}`;
+    // fetch(url)
+    //     .then((response) => {
+    //         return response.text();
+    //     })
+    //     .then((data) => {
+    //         setTimeout(() => {
+    //             document.getElementById('ans').innerHTML = data;
+    //         }, 2000);
+    //     })
+    //     .catch(() => console.log('An error occurred'));
 }
 // 'https://api.wolframalpha.com/v1/spoken?appid=${this.appid}&i=what is a noun
-
-function displayResults(results) {
-    // Loop over results array
-    results.forEach(result => {
-        const url = encodeURI(`https://simple.wikipedia.org/wiki/${result.title}`);
-
-        var resultTitle = `<a href="${url}" target="_blank" rel="noopener">${result.title}</a>`;
-        var answer = `<span class="resultItem-snippet">${result.snippet}</span><br>`;
-        var resultUrl = `<a href="${url}" class="resultItem-link" target="_blank" rel="noopener">${url}</a>`
-
-
-    });
-}
