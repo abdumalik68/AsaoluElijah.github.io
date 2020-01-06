@@ -90,13 +90,4 @@ var c = document.getElementById('copy_year');
 var cd = new Date().getFullYear();
 c.innerHTML = cd;
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js').then(function() {
-            // console.log("Service Worker Registered!");
-
-        });
-    });
-}
-
 console.log("%cMADE WITH ❤ BY ASAOLU ELIJAH", "font-weight: bold; font-size: 50px; color: #ff4f51; text-shadow: 1px 1px 0px black, 1px -1px 0px black, -1px 1px 0px black, -1px -1px 0px black;");
