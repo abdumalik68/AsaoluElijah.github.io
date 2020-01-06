@@ -1,60 +1,75 @@
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-sw.js");
+/*
+ Copyright 2016 Google Inc. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
-if (workbox) {
-    // console.log("Work Box Started!");
-    workbox.precaching.precacheAndRoute([]);
+// Names of the two caches used in this version of the service worker.
+// Change to v2, etc. when you update any of the local resources, which will
+// in turn trigger the install event again.
+const PRECACHE = 'precache-v1';
+const RUNTIME = 'runtime';
 
-    /*  cache images in the e.g others folder; edit to other folders you got
-   and config in the sw-config.js file
-    */
-    workbox.routing.registerRoute(
-        /(.*)others(.*)\.(?:png|gif|jpg)/,
-        new workbox.strategies.CacheFirst({
-            cacheName: "images",
-            plugins: [
-                new workbox.expiration.Plugin({
-                    maxEntries: 50,
-                    maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
-                })
-            ]
-        })
+// A list of local resources we always want to be cached.
+const PRECACHE_URLS = [
+  'index.html',
+  './', // Alias for index.html
+  'styles.css',
+  '../../styles/main.css',
+  'demo.js'
+];
+
+// The install handler takes care of precaching the resources we always need.
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(PRECACHE)
+      .then(cache => cache.addAll(PRECACHE_URLS))
+      .then(self.skipWaiting())
+  );
+});
+
+// The activate handler takes care of cleaning up old caches.
+self.addEventListener('activate', event => {
+  const currentCaches = [PRECACHE, RUNTIME];
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => self.clients.claim())
+  );
+});
+
+// The fetch handler serves responses for same-origin resources from a cache.
+// If no response is found, it populates the runtime cache with the response
+// from the network before returning it to the page.
+self.addEventListener('fetch', event => {
+  // Skip cross-origin requests, like those for Google Analytics.
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(
+      caches.match(event.request).then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        return caches.open(RUNTIME).then(cache => {
+          return fetch(event.request).then(response => {
+            // Put a copy of the response in the runtime cache.
+            return cache.put(event.request, response.clone()).then(() => {
+              return response;
+            });
+          });
+        });
+      })
     );
-    /* Make your JS and CSS Ã¢Å¡Â¡ fast by returning the assets from the cache,
-  while making sure they are updated in the background for the next use.
-  */
-    workbox.routing.registerRoute(
-        // cache js, css, scc files
-        /.*\.(?:css|js|scss|)/,
-        // use cache but update in the background ASAP
-        new workbox.strategies.StaleWhileRevalidate({
-            // use a custom cache name
-            cacheName: "assets",
-        })
-    );
-
-    // cache google fonts
-    workbox.routing.registerRoute(
-        new RegExp("https://fonts.(?:googleapis|gstatic).com/(.*)"),
-        new workbox.strategies.CacheFirst({
-            cacheName: "google-fonts",
-            plugins: [
-                new workbox.cacheableResponse.Plugin({
-                    statuses: [0, 200],
-                }),
-            ],
-        })
-    );
-
-    // add offline analytics
-    workbox.googleAnalytics.initialize();
-
-    /* Install a new service worker and have it update
-and control a web page as soon as possible
-*/
-
-    workbox.core.skipWaiting();
-    workbox.core.clientsClaim();
-
-} else {
-    // console.log("Oops! Unable to load work box :(");
-}
+  }
+});
