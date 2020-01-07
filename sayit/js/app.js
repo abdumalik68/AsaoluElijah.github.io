@@ -30,6 +30,7 @@ function startRecording() {
             document.getElementById('alert-box').innerHTML = "Recording Has Stopped 👏";
         }, 1000);
         setTimeout(() => {
+            document.getElementById("share-buttons").innerHTML = "";
             showShareButtons(textOutput);
         }, 2000);
     }
