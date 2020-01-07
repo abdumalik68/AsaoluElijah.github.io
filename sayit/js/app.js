@@ -24,17 +24,17 @@ function startRecording() {
     }
     recognition.start();
     recognition.onend = function() {
-        document.getElementById('alert-box').classList.add('alert-danger');
         // ...   
         document.getElementById("share-buttons").innerHTML = "";
         document.getElementById('alert-box').classList.add('alert-success');
         
-        setTimeout(() => 
+        setTimeout(() => {
+            document.getElementById('alert-box').classList.add('alert-success');
             document.getElementById('alert-box').innerHTML = "Recording Has Stopped 👏";
         }, 1000);
         setTimeout(() => {
             showShareButtons(textOutput.value);
-        }, 2000);
+        }, 1500);
     }
 }
 
