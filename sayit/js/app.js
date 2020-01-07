@@ -13,11 +13,12 @@ function startRecording() {
         document.getElementById('alert-box').innerHTML = "Started Recorder, Now Try Say Something 🔊";
     }, 1000);
 
-    recognition.onresult = function(event) {
-        console.log(event || "nothing here");
         var output = document.getElementById("output");
           //  ...
         output.innerHTML = output.innerHTML;
+    console.log("former output " + output.innerHTML);
+    recognition.onresult = function(event) {
+        console.log(event || "nothing here");
         for (var i = 0; i < event.results.length; i++) {
             output.innerHTML = output.innerHTML + " " + event.results[i][0].transcript;
             textOutput = textOutput + event.results[i][0].transcript;
