@@ -16,6 +16,7 @@ function startRecording() {
     
     recognition.onresult = function(event) {
         console.log(event || "nothing here");
+        output.value = "";
         for (var i = 0; i < event.results.length; i++) {
             output.value = output.value + " " + event.results[i][0].transcript;
         }
