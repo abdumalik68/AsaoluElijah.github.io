@@ -1,5 +1,6 @@
 "use strict";
-const textOutput = "";
+// const textOutput = "";
+const output = document.getElementById("output");
 var recognition = new webkitSpeechRecognition() ||
     root.mozSpeechRecognition ||
     root.msSpeechRecognition ||
@@ -12,16 +13,11 @@ function startRecording() {
     setTimeout(() => {
         document.getElementById('alert-box').innerHTML = "Started Recorder, Now Try Say Something 🔊";
     }, 1000);
-
-        var output = document.getElementById("output");
-          //  ...
-        output.innerHTML = output.innerHTML;
-    console.log("former output " + output.innerHTML);
+    
     recognition.onresult = function(event) {
         console.log(event || "nothing here");
         for (var i = 0; i < event.results.length; i++) {
-            output.innerHTML = output.innerHTML + " " + event.results[i][0].transcript;
-            textOutput = textOutput + event.results[i][0].transcript;
+            output.value = output.value + " " + event.results[i][0].transcript;
         }
     }
     recognition.start();
@@ -33,7 +29,7 @@ function startRecording() {
             document.getElementById('alert-box').innerHTML = "Recording Has Stopped 👏";
         }, 1000);
         setTimeout(() => {
-            showShareButtons(textOutput);
+            showShareButtons(output.value);
         }, 2000);
     }
 }
