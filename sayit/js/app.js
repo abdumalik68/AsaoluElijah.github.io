@@ -1,6 +1,5 @@
 "use strict";
-// const textOutput = "";
-const output = document.getElementById("output");
+const textOutput = document.getElementById("output");
 var recognition = new webkitSpeechRecognition() ||
     root.mozSpeechRecognition ||
     root.msSpeechRecognition ||
@@ -16,22 +15,25 @@ function startRecording() {
     
     recognition.onresult = function(event) {
         console.log(event || "nothing here");
-        // output.value = "";
-        document.getElementById("output").value= "";
+        
+        var output = document.getElementById("output").value= "";
+        output.innerHTML = "";
         for (var i = 0; i < event.results.length; i++) {
-            output.value = output.value + event.results[i][0].transcript;
+            output.innerHTML = output.innerHTML + event.results[i][0].transcript;
         }
     }
     recognition.start();
     recognition.onend = function() {
         document.getElementById('alert-box').classList.add('alert-danger');
-        //          
+        // ...   
         document.getElementById("share-buttons").innerHTML = "";
-        setTimeout(() => {
+        document.getElementById('alert-box').classList.add('alert-success');
+        
+        setTimeout(() => 
             document.getElementById('alert-box').innerHTML = "Recording Has Stopped 👏";
         }, 1000);
         setTimeout(() => {
-            showShareButtons(output.value);
+            showShareButtons(textOutput.value);
         }, 2000);
     }
 }
