@@ -15,7 +15,7 @@ body {
 
 #quote {
     font-size: 40px !important;
-    font-family: cursive;
+    font-weight: bold;
 }
 
 .author {
