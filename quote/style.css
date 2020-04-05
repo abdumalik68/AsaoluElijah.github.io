@@ -2,6 +2,7 @@
 
 body {
     background: linear-gradient(to right, #ff7300, #ff4800);
+    background-size: cover;
     color: #fff;
     font-family: 'Comic Neue', cursive;
 }
@@ -19,5 +20,6 @@ body {
 }
 
 .author {
+    font-size: 20px;
     font-weight: normal;
 }
