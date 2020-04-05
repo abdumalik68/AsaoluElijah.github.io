@@ -16,4 +16,6 @@ function generateQuote(){
 }
 //Repeat generateQuote() every 10 sec
 //10000 milliseconds = 10 seconds
-setInterval(generateQuote() ,10000);
+setInterval(function(){
+   generateQuote();
+} ,10000);
